@@ -4,7 +4,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -23,7 +22,7 @@ const navItems = ['Home', 'Experience', 'Projects', 'Contact'] as const;
 const name = "Alex Wecker"
 
 interface Props {
-    navAction: (target: string) => void
+    navAction: (target: navigationTarget) => void
 }
 
 export default function DrawerAppBar(props: Props) {
@@ -100,7 +99,7 @@ export default function DrawerAppBar(props: Props) {
                             top: `${appbarHeight}px`
                         },
                         '& .MuiModal-backdrop': {
-                            top:`${appbarHeight}px`
+                            top: `${appbarHeight}px`
                         },
                         '& .MuiDrawer-root': {
                         },
@@ -113,3 +112,5 @@ export default function DrawerAppBar(props: Props) {
         </Box>
     );
 }
+
+export type navigationTarget = typeof navItems[number]

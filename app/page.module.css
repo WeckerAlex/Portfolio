@@ -1,17 +1,23 @@
 .header {
   background-color: var(--surface1);
-  color: var(--primary);
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
   min-height: 100vh;
+}
+
+.main>*:nth-child(1) {
+  scroll-margin-top: 64px;
+}
+
+.main>*:nth-child(2n+1) {
+  background-color: var(--surface1);
+}
+
+.main>*:nth-child(2n) {
   background-color: var(--surface2);
-  color: var(--primary);
 }
 
 /* Mobile */

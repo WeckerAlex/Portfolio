@@ -1,19 +1,30 @@
 'use client'
-import NavBar from "./components/App_Bar/App_bar";
+import { useRef } from "react";
+import NavBar, { navigationTarget } from "./components/App_Bar/App_bar";
+import Hero from "./components/hero/hero";
 import styles from "./page.module.css";
 
-const scrollTo = (target: string) => {
-  console.log(`Scroll to ${target}`);
-}
-
 export default function Home() {
+  const refs = {
+    'Home': useRef<null | HTMLElement>(null),
+    'Experience': useRef<null | HTMLElement>(null),
+    'Projects': useRef<null | HTMLElement>(null),
+    'Contact': useRef<null | HTMLElement>(null),
+  }
+
+  const scrollTo = (target: navigationTarget) => {
+    console.log(`Scroll to ${target}`);
+    refs[target].current?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <>
       <header className={styles.header}>
         <NavBar navAction={scrollTo} />
       </header>
       <main className={styles.main}>
-      </main>
+        <Hero sectionRef={refs['Home']}></Hero>
+      </main >
     </>
   );
 }
