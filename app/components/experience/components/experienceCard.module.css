@@ -1,0 +1,32 @@
+.card {
+    /*min-width: 100px;
+    width: 250px;
+    max-width: 40vw;*/
+    width: clamp(0px, 250px, 40vw);
+    height: 250px;
+    margin: 8px;
+}
+
+.cardMedia {
+    position: relative;
+    padding: 8px;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.cardContent {
+    display: grid;
+    place-content: center;
+    padding: 24px;
+    height: 50px;
+    width: 100%;
+}
+
+.cardMedia[data-tech="Docker"] {
+    padding: 25%;
+}
+
+.cardMedia[data-tech="Swift"] {
+    padding: 12.5%;
+}

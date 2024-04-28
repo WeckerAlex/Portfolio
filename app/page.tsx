@@ -3,6 +3,7 @@ import { useRef } from "react";
 import NavBar, { navigationTarget } from "./components/App_Bar/App_bar";
 import Hero from "./components/hero/hero";
 import styles from "./page.module.css";
+import Experience from "./components/experience/experience";
 
 export default function Home() {
   const refs = {
@@ -24,6 +25,7 @@ export default function Home() {
       </header>
       <main className={styles.main}>
         <Hero sectionRef={refs['Home']}></Hero>
+        <Experience sectionRef={refs['Experience']}></Experience>
       </main >
     </>
   );
