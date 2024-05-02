@@ -1,7 +1,4 @@
 .card {
-    /*min-width: 100px;
-    width: 250px;
-    max-width: 40vw;*/
     width: clamp(0px, 250px, 40vw);
     height: 250px;
     margin: 8px;
@@ -12,13 +9,14 @@
     padding: 8px;
     width: 100%;
     height: 200px;
-    object-fit: contain;
+    object-fit: contain !important;
+    pointer-events: none;
 }
 
 .cardContent {
     display: grid;
     place-content: center;
-    padding: 24px;
+    padding: 16px !important;
     height: 50px;
     width: 100%;
 }

@@ -1,5 +1,5 @@
 .heroSection {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     justify-content: space-between;
     padding: 24px;
@@ -23,23 +23,18 @@
 }
 
 .heroImage {
+    position: relative;
     width: 50%;
     max-width: 100%;
     display: grid;
+    aspect-ratio: 0.7777777778;
     place-content: center;
-}
-
-.heroImage>img {
-    border-radius: 80px;
-    pointer-events: none;
 }
 
 /* Mobile */
 @media (max-width: 700px) {
     .heroSection {
-        display: flex;
         flex-direction: column;
-        justify-content: space-between;
     }
 
     .heroText {
@@ -50,16 +45,15 @@
     }
 
     .heroImage {
-        width: 100%;
-        display: grid;
-        place-content: center end;
+        width: 80%;
+        margin-left: auto;
     }
 }
 
 .content {
-    margin: 25px;
-    /* replace with the image you like here */
-    background-image: linear-gradient(to top, blue 0%, blue 100%);
+    border-radius: 80px;
+    pointer-events: none;
+    object-fit: contain;
 
     /* for webkit-based browsers */
     -webkit-mask-image:

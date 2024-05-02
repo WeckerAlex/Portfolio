@@ -38,8 +38,8 @@ const hero = ({ sectionRef }: Props) => {
                     className={styles.content}
                     src={profilePic}
                     priority={true}
-                    width={500}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                     alt="Picture of the author"
                 />
             </Box>
