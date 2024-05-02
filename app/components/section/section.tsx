@@ -2,7 +2,7 @@ import { Box, Container } from '@mui/material'
 import React, { MutableRefObject } from 'react'
 
 interface Props extends React.PropsWithChildren {
-    className: string | undefined
+    className?: string
     containerRef: MutableRefObject<HTMLElement | null>
 }
 
