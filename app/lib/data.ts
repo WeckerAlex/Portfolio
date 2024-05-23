@@ -57,7 +57,42 @@ export const experienceList: Experience[] = [
     }
 ]
 
-
+export const projectList: Project[] = [{
+    title: "125 years LAM",
+    name: "TimelineProject",
+    image: 'LAM_125y.png',
+    description: `This website is meant to celebrate the 125th year the LAM exists. Users can look up interesting numbers, directors, sites, formations and expositions.`,
+    team: [{
+        title: "Developper",
+        number: 3
+    }, {
+        title: "Designer",
+        number: 2
+    }],
+    tech: ["Html", "Css", "Js", "Php", "Laravel", "Mysql"],
+    projectLinks: [
+        {
+            description: "Github",
+            url: "https://github.com/WeckerAlex/TimelineProject"
+        },
+    ]
+}, {
+    title: "Table Tennis Manager",
+    name: "TTManager",
+    image: 'TTManager.png',
+    description: 'TTManager app is an app which can be used to look up data about table tennis. The users can look up many informations about their played matches and other useful data',
+    team: [{
+        title: "Developper",
+        number: 1
+    }],
+    tech: ["Swift", "SQLite"],
+    projectLinks: [
+        {
+            description: "Github",
+            url: "https://github.com/WeckerAlex/TTManager"
+        }
+    ]
+}]
 
 //Routing and Switching: Connecting Networks
 //Routing and Switching: Scaling Networks
@@ -68,4 +103,22 @@ export const experienceList: Experience[] = [
 export interface Experience {
     name: string
     image: string
+}
+
+export interface Project {
+    title: string
+    name: string
+    image: string
+    description: string
+    team: TeamMember[]
+    tech: String[]
+    projectLinks?: ProjectLink[]
+}
+interface TeamMember {
+    title: string
+    number: number
+}
+interface ProjectLink {
+    description: string,
+    url: string
 }

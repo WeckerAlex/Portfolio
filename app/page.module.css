@@ -8,7 +8,7 @@
   min-height: 100vh;
 }
 
-.main>*:nth-child(1) {
+.main>* {
   scroll-margin-top: 64px;
 }
 

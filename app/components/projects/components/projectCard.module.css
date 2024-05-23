@@ -1,0 +1,36 @@
+.projectCard {
+    position: relative;
+    margin: 8px;
+    max-width: 345px;
+    aspect-ratio: 0.6180339887;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    background-color: var(--surface2);
+}
+
+.projectCardContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+.projectCardProjectDescription {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.projectCardAdditionalInfo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px;
+}
+
+.projectCardChiplist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}

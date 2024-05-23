@@ -1,9 +1,10 @@
 'use client'
 import { useRef } from "react";
 import NavBar, { navigationTarget } from "./components/App_Bar/App_bar";
-import Hero from "./components/hero/hero";
 import styles from "./page.module.css";
+import Hero from "./components/hero/hero";
 import Experience from "./components/experience/experience";
+import Projects from "./components/projects/projects";
 
 export default function Home() {
   const refs = {
@@ -26,6 +27,7 @@ export default function Home() {
       <main className={styles.main}>
         <Hero sectionRef={refs['Home']}></Hero>
         <Experience sectionRef={refs['Experience']}></Experience>
+        <Projects sectionRef={refs['Projects']}></Projects>
       </main >
     </>
   );
