@@ -47,7 +47,7 @@ const projectCard = ({ project }: Props) => {
             {project.projectLinks && project.projectLinks.length > 0 ?
                 <CardActions sx={{ 'flexDirection': 'row', 'gap': 1, m: 1, ml: 'auto' }}>
                     {project.projectLinks.map(projectLink =>
-                        <Button size="small" variant="contained" disableElevation onClick={() => window.open(projectLink.url, "_blank")} key={`${project.name} ${projectLink.description}`}>{projectLink.description}</Button>
+                        <Button href={projectLink.url} size="small" variant="contained" disableElevation key={`${project.name} ${projectLink.description}`}>{projectLink.description}</Button>
                     )}
                 </CardActions> : null}
         </Card >

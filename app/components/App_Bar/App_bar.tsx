@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Link from 'next/link';
 
 
 const drawerWidth = 240;
@@ -21,28 +22,22 @@ const appbarHeight = 56;
 const navItems = ['Home', 'Experience', 'Projects', 'Contact'] as const;
 const name = "Alex Wecker"
 
-interface Props {
-    navAction: (target: navigationTarget) => void
-}
 
-export default function DrawerAppBar(props: Props) {
-    const navAction = props.navAction;
+export default function DrawerAppBar() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
-    };
-
-    const handleNavClick = (item: typeof navItems[number]) => {
-        navAction(item)
     };
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} >
             <List>
                 {navItems.map((item) => (
-                    <ListItem onClick={handleNavClick.bind(null, item)} key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
+                    <ListItem key={item} disablePadding>
+                        <ListItemButton sx={{ textAlign: 'center' }}>                            
+                            <Link href={`#${item}`} scroll={true}>
+                                <ListItemText primary={item} />
+                            </Link>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -72,10 +67,10 @@ export default function DrawerAppBar(props: Props) {
                         {name}
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        {navItems.map((item) => (
-                            <Button key={item} onClick={handleNavClick.bind(null, item)} sx={{ color: '#fff' }}>
-                                {item}
-                            </Button>
+                        {navItems.map((item) => (                          
+                            <Link key={item} href={`#${item}`} scroll={true}>
+                                <Button sx={{ color: '#fff' }}>{item}</Button>
+                            </Link>
                         ))}
                     </Box>
                 </Toolbar>
@@ -112,5 +107,3 @@ export default function DrawerAppBar(props: Props) {
         </Box>
     );
 }
-
-export type navigationTarget = typeof navItems[number]

@@ -1,17 +1,17 @@
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 import Section from '../section/section'
 import styles from "./experience.module.css";
 import ExperienceCard from './components/experienceCard';
 import { Grid, Typography } from '@mui/material';
 import { experienceList } from '../../lib/data';
 
-interface Props extends React.PropsWithChildren {
-    sectionRef: MutableRefObject<HTMLElement | null>
+interface Props {
+    id: string
 }
 
-const experience = ({ sectionRef }: Props) => {
+const experience = ({ id }: Props) => {
     return (
-        <Section className={styles.experienceSection} containerRef={sectionRef}>
+        <Section id={id} className={styles.experienceSection}>
             <Typography variant="h5" component="h3">
                 <Typography variant="h5" component="span">
                     My&ensp;

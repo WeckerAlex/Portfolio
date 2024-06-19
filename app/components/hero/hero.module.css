@@ -17,8 +17,7 @@
     gap: 24px;
 }
 
-.heroText>*>button {
-    align-self: center;
+.heroText>*>a {
     width: fit-content;
 }
 

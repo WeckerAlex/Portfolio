@@ -1,21 +1,17 @@
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 import Section from '../section/section'
 import Image from 'next/image'
 import { Box, Button, Typography } from '@mui/material'
 import styles from "./hero.module.css";
 import profilePic from '/public/Portrait.png'
 
-const showContact = () => {
-    alert('clicked');
+interface Props {
+    id: string
 }
 
-interface Props extends React.PropsWithChildren {
-    sectionRef: MutableRefObject<HTMLElement | null>
-}
-
-const hero = ({ sectionRef }: Props) => {
+const hero = ({ id }: Props) => {
     return (
-        <Section className={styles.heroSection} containerRef={sectionRef}>
+        <Section id={id} className={styles.heroSection}>
             <Box className={styles.heroText}>
                 <Box>
                     <Typography variant='h5' component={'h2'}>
@@ -27,8 +23,7 @@ const hero = ({ sectionRef }: Props) => {
                     <Typography variant='h5' component={'h2'}>
                         Fullstack web developper
                     </Typography>
-                    <Button variant={'contained'} color='primary' disableElevation
-                        onClick={showContact} >
+                    <Button variant={'contained'} color='primary' href={`#Contact`} disableElevation>
                         Contact me
                     </Button>
                 </Box>

@@ -1,18 +1,17 @@
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 import Section from '../section/section'
 import styles from "./projects.module.css";
 import ProjectCard from './components/projectCard';
 import { Grid, Typography } from '@mui/material'
 import { projectList } from '../../lib/data';
 
-
-interface Props extends React.PropsWithChildren {
-    sectionRef: MutableRefObject<HTMLElement | null>
+interface Props {
+    id: string
 }
 
-const projects = ({ sectionRef }: Props) => {
+const projects = ({ id }: Props) => {
     return (
-        <Section className={styles.projectsSection} containerRef={sectionRef}>
+        <Section id={id} className={styles.projectsSection}>
             <Typography variant="h5" component="h3">
                 <Typography variant="h5" component="span">
                     My&ensp;

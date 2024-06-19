@@ -1,14 +1,14 @@
 import { Box, Container } from '@mui/material'
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 
 interface Props extends React.PropsWithChildren {
     className?: string
-    containerRef: MutableRefObject<HTMLElement | null>
+    id: string
 }
 
-const section = ({ children, className, containerRef }: Props) => {
+const section = ({ children, id, className/*, containerRef*/ }: Props) => {
     return (
-        <Box ref={containerRef}>
+        <Box id={id}>
             <Container className={className}>
                 {children}
             </Container>
