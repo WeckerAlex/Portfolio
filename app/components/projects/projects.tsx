@@ -3,13 +3,20 @@ import Section from '../section/section'
 import styles from "./projects.module.css";
 import ProjectCard from './components/projectCard';
 import { Grid, Typography } from '@mui/material'
-import { projectList } from '../../lib/data';
+import Project from '@/app/lib/database/models/project';
 
 interface Props {
     id: string
 }
 
-const projects = ({ id }: Props) => {
+const getProjectList = async () => (
+    await Project.findAll({
+        include: [{ all: true }]
+    })
+);
+
+const projects = async ({ id }: Props) => {
+    const projectList = await getProjectList();
     return (
         <Section id={id} className={styles.projectsSection}>
             <Typography variant="h5" component="h3">
@@ -22,13 +29,17 @@ const projects = ({ id }: Props) => {
             </Typography>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }}>
                 {
-                    projectList.map(project =>
-                        <Grid item xs={12} md={4} key={project.name} sx={{ height: '100%' }}>
-                            <ProjectCard
-                                project={project}
-                            />
-                        </Grid>
-                    )
+                    (projectList) ?
+                        (
+                            projectList.map(project =>
+                                <Grid item xs={12} md={4} key={project.name} sx={{ height: '100%' }}>
+                                    <ProjectCard
+                                        project={project}
+                                    />
+                                </Grid>
+                            )
+                        ) :
+                        (null)
                 }
             </Grid>
         </Section >
@@ -36,3 +47,6 @@ const projects = ({ id }: Props) => {
 }
 
 export default projects
+
+export const revalidate = 3600 // revalidate the data at most every hour
+export const dynamic = 'force-dynamic'

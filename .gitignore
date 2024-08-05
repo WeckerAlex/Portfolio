@@ -38,3 +38,8 @@ next-env.d.ts
 # development
 dev.Dockerfile
 dev.docker-compose.yml
+
+db_password.txt
+db_root_password.txt
+
+.vscode

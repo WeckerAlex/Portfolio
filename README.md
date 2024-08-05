@@ -18,3 +18,7 @@ Technologies Used:
 ## Experience
 
 <img src="Readme_Screenshots\Experience.png" alt="Home" width="100%"/>
+
+## Projects
+
+<img src="Readme_Screenshots\Projects.png" alt="Projects" width="100%"/>

@@ -6,10 +6,35 @@ services:
       args:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    depends_on:
+      - database
     restart: always
     networks:
       - proxymanager_default
+      - portfolio_network
+  database:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_USER: alex
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_DATABASE: DB_Portfolio
+    networks:
+      - portfolio_network
+    volumes:
+      - ./db_data:/var/lib/mysql
+    secrets:
+      - db_root_password
+      - db_password
 
 networks:
+  portfolio_network:
   proxymanager_default:
     external: true
+
+secrets:
+  db_password:
+    file: db_password.txt
+  db_root_password:
+    file: db_root_password.txt

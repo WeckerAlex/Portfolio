@@ -3,13 +3,26 @@ import Section from '../section/section'
 import styles from "./experience.module.css";
 import ExperienceCard from './components/experienceCard';
 import { Grid, Typography } from '@mui/material';
-import { experienceList } from '../../lib/data';
+import Experience from '@/app/lib/database/models/experience';
+import { Op } from 'sequelize';
 
 interface Props {
     id: string
 }
 
-const experience = ({ id }: Props) => {
+const getExperienceList = async () => (
+    await Experience.findAll({
+        where: {
+            skill: {
+                [Op.gte]: 50
+            }
+        },
+        order: [['skill', 'DESC']]
+    })
+);
+
+const experience = async ({ id }: Props) => {
+    const experienceList = await getExperienceList();
     return (
         <Section id={id} className={styles.experienceSection}>
             <Typography variant="h5" component="h3">
@@ -36,3 +49,6 @@ const experience = ({ id }: Props) => {
 }
 
 export default experience
+
+export const revalidate = 3600 // revalidate the data at most every hour
+export const dynamic = 'force-dynamic'
