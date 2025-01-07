@@ -1,11 +1,10 @@
-version: "3.8"
-
 services:
   portfolio:
     build:
       args:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    container_name: portfolio-portfolio
     depends_on:
       - database
     restart: always
@@ -14,6 +13,7 @@ services:
       - portfolio_network
   database:
     image: mysql
+    container_name: portfolio-database
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
