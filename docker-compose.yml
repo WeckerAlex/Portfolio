@@ -12,7 +12,7 @@ services:
       - proxymanager_default
       - portfolio_network
   database:
-    image: mysql
+    image: mysql:lts
     container_name: portfolio-database
     restart: always
     environment:
