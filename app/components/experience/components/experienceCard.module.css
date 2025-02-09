@@ -2,6 +2,7 @@
     width: clamp(0px, 250px, 40vw);
     height: 250px;
     margin: 8px;
+    background-color: var(--surface2);
 }
 
 .cardMedia {
