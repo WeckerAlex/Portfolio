@@ -19,7 +19,7 @@ import Link from 'next/link';
 
 const drawerWidth = 240;
 const appbarHeight = 56;
-const navItems = ['Home', 'Experience', 'Projects', 'Contact'] as const;
+const navItems = ['Home', 'Experience', 'Projects','Certificates', 'Contact'] as const;
 const name = "Alex Wecker"
 
 

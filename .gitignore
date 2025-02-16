@@ -41,5 +41,6 @@ dev.docker-compose.yml
 
 db_password.txt
 db_root_password.txt
+public/*
 
 .vscode

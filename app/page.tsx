@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Hero from "./components/hero/hero";
 import Experience from "./components/experience/experience";
 import Projects from "./components/projects/projects";
+import Certificates from "./components/certificates/certificate";
 
 export default function Home() {
 
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero id={"Home"}></Hero>
         <Experience id={"Experience"}></Experience>
         <Projects id={"Projects"}></Projects>
+        <Certificates id={"Certificates"}></Certificates>
       </main>
     </>
   );

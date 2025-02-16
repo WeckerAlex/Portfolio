@@ -3,6 +3,8 @@ import Experience from './models/experience';
 import Project from './models/project';
 import Job from './models/job';
 import Link from './models/link';
+import CertificateIssuer from './models/certificateissuer';
+import Certificate from './models/certificate';
 import sequelize from './db';
 
 describe('DB', () => {
@@ -14,6 +16,8 @@ describe('DB', () => {
     let job: Job
     let lnk: Link
     let pro: Project
+    let cer: Certificate
+    let ceI: CertificateIssuer
 
     describe('Create', () => {
 
@@ -46,6 +50,19 @@ describe('DB', () => {
                 description: "Testdescription"
             });
         });
+
+        test('CertificateIssuer', async () => {
+            ceI = await CertificateIssuer.create({
+                name: "Test",
+            });
+        });
+
+        test('Certificate', async () => {
+            cer = await Certificate.create({
+                name: "Test",
+                image: "Test"
+            });
+        });
     })
 
     describe('Update', () => {
@@ -54,6 +71,8 @@ describe('DB', () => {
         const jobnewttle = "jobnewttle"
         const lnknewttle = "lnknewttle"
         const pronewname = "pronewname"
+        const cernewname = "cernewname"
+        const ceInewname = "ceinewname"
 
         test('Experience', async () => {
             exp.name = expnewname;
@@ -110,6 +129,30 @@ describe('DB', () => {
             });
             expect(project?.experiences).toHaveLength(1)
         });
+
+        test('CertificateIssuer', async () => {
+            cer.name = ceInewname;
+            await cer.save();
+            cer.name = "";
+            await cer.reload();
+            expect(cer.name).toBe(ceInewname);
+        });
+
+        test('Certificate', async () => {
+            cer.name = cernewname;
+            await cer.save();
+            cer.name = "";
+            await cer.reload();
+            expect(cer.name).toBe(cernewname);
+        });
+
+        test('Certificate(issuer)', async () => {
+            await cer.setCertificateIssuer(ceI)
+            const certificate = await Certificate.findByPk(cer.id, {
+                include: 'CertificateIssuer'
+            });
+            expect((await certificate?.getCertificateIssuer())?.id).toBe(ceI.id)
+        });
     })
 
     describe('Delete', () => {
@@ -139,6 +182,20 @@ describe('DB', () => {
             const id = pro.id; 
             await pro.destroy()
             const res = await Project.findByPk(id);
+            expect(res).toBeNull();
+        });
+
+        test('CertificateIssuer', async () => {
+            const id = ceI.id;
+            await ceI.destroy()
+            const res = await CertificateIssuer.findByPk(id);
+            expect(res).toBeNull();
+        });
+
+        test('Certificate', async () => {
+            const id = cer.id;
+            await cer.destroy()
+            const res = await Certificate.findByPk(id);
             expect(res).toBeNull();
         });
 

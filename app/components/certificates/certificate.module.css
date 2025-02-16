@@ -1,0 +1,11 @@
+.certificateSection {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.certificateIssuer {
+    padding: 8px;
+}

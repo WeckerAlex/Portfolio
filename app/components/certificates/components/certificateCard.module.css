@@ -1,0 +1,29 @@
+.card {
+    position: relative;
+    margin: 8px;
+    max-width: 345px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    background-color: var(--surface2);
+}
+
+.cardMedia {
+    position: relative;
+    padding: 8px;
+    border-radius: 16px;
+    width: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    aspect-ratio: 1;
+    object-position: center top;
+    flex-grow: 1;
+}
+
+.cardContent {
+    display: grid;
+    place-content: center;
+    padding: 16px;
+    width: 100%;
+    flex-grow: 1;
+}
