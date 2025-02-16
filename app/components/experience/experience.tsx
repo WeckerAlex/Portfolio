@@ -1,5 +1,5 @@
-import React from 'react'
-import Section from '../section/section'
+import React from 'react';
+import Section from '../section/section';
 import styles from "./experience.module.css";
 import ExperienceCard from './components/experienceCard';
 import { Grid, Typography } from '@mui/material';
