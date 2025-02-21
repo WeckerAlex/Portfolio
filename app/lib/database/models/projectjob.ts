@@ -20,5 +20,9 @@ Projectjob.init(
         timestamps: false
     },
 );
-
+export interface ProjectJobJSON {
+    count: number,
+    ProjectId: number,
+    JobId: number
+}
 export default Projectjob

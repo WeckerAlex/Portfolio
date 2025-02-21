@@ -1,5 +1,7 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../db';
+import { ProjectJSON } from './project';
+import { ProjectJobJSON } from './projectjob';
 
 class Job extends Model<InferAttributes<Job>, InferCreationAttributes<Job>> {
     declare id: CreationOptional<number>
@@ -25,5 +27,18 @@ Job.init(
         timestamps: false
     },
 );
+
+export interface JobJSON {
+    id: number,
+    title: string
+}
+
+export interface ProjectJSONWithProjectjob extends ProjectJSON{
+    Projectjob: ProjectJobJSON
+}
+
+export interface JobWithProjectsJSON extends JobJSON {
+    Projects: ProjectJSONWithProjectjob[]
+}
 
 export default Job

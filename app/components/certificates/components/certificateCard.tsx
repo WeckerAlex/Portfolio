@@ -1,11 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import styles from "./certificateCard.module.css";
 import React from 'react';
-import Certificate from '@/app/lib/database/models/certificate';
+import { CertificateJSON } from '@/app/lib/database/models/certificate';
 
 
 interface Props {
-    certificate: Certificate
+    certificate: CertificateJSON
 }
 
 const CertificateCard = ({ certificate }: Props) => {

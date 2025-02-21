@@ -1,9 +1,9 @@
 import { Association, CreationOptional, DataTypes, HasManyAddAssociationMixin, HasManyAddAssociationsMixin, HasManyCountAssociationsMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManyHasAssociationMixin, HasManyHasAssociationsMixin, HasManyRemoveAssociationMixin, HasManyRemoveAssociationsMixin, HasManySetAssociationsMixin, InferAttributes, InferCreationAttributes, Model, NonAttribute } from 'sequelize';
 import sequelize from '../db';
-import Job from './job';
-import Link from './link';
+import Job, { ProjectJSONWithProjectjob } from './job';
+import Link, { LinkJSON } from './link';
 import Projectjob from './projectjob';
-import Experience from './experience';
+import Experience, { ExperienceJSON } from './experience';
 
 class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>> {
     declare id: CreationOptional<number>
@@ -115,5 +115,20 @@ Experience.belongsToMany(Project, {
     through: 'Projectexperiences',
     timestamps: false
 });
+
+
+export interface ProjectJSON {
+    id: number,
+    title: string
+    name: string
+    image: string
+    description: string
+}
+
+export interface ProjectWithAllJSON extends ProjectJSON {
+    jobs: ProjectJSONWithProjectjob[]
+    links: LinkJSON[]
+    experiences: ExperienceJSON[]
+}
 
 export default Project

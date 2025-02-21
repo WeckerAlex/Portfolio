@@ -1,11 +1,10 @@
 import React from 'react'
-// import { Project } from '@/app/lib/data';
-import Project from '@/app/lib/database/models/project';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import styles from "./projectCard.module.css";
+import { ProjectWithAllJSON } from '@/app/lib/database/models/project';
 
 interface Props {
-    project: Project
+    project: ProjectWithAllJSON
 }
 
 const projectCard = ({ project }: Props) => {
@@ -31,8 +30,8 @@ const projectCard = ({ project }: Props) => {
                         Team:
                     </Typography>
                     <Box className={styles.projectCardChiplist}>
-                        {project.jobs ? project.jobs.map(job =>
-                            //@ts-expect-error
+                        {
+                            project.jobs ? project.jobs.map(job =>
                             <Chip label={`${job.Projectjob.count} ${job.title}`} size="small" variant="filled" key={`${project.name} ${job.title}`} />
                         ) : null}
                     </Box>
@@ -40,17 +39,21 @@ const projectCard = ({ project }: Props) => {
                         Tech:
                     </Typography>
                     <Box className={styles.projectCardChiplist}>
-                        {project.experiences ? project.experiences.map(tech =>
+                        {
+                            project.experiences ? project.experiences.map(tech =>
                             <Chip label={tech.name} size="small" variant="filled" key={`${project.name} ${tech.name}`} />
                         ) : null}
                     </Box>
                 </Box>
             </CardContent>
-            {project.links ?
+            {
+                project.links ?
                 <CardActions sx={{ 'flexDirection': 'row', 'gap': 1, m: 1, ml: 'auto' }}>
-                    {project.links.map(link =>
-                        <Button href={link.link} size="small" variant="contained" disableElevation key={`${project.name} ${link.title}`}>{link.title}</Button>
-                    )}
+                        {
+                            project.links.map(link =>
+                                <Button href={link.link} size="small" variant="contained" disableElevation key={`${project.name} ${link.title}`}>{link.title}</Button>
+                            )
+                        }
                 </CardActions> : null}
         </Card >
     );

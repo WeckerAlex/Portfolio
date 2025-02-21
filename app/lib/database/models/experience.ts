@@ -37,4 +37,11 @@ Experience.init(
     },
 );
 
+export interface ExperienceJSON {
+    id: number,
+    name: string,
+    image: string,
+    skill: number,
+}
+
 export default Experience

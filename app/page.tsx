@@ -1,24 +1,36 @@
-import NavBar from "./components/App_Bar/App_bar";
-import styles from "./page.module.css";
-import Hero from "./components/hero/hero";
-import Experience from "./components/experience/experience";
-import Projects from "./components/projects/projects";
-import Certificates from "./components/certificates/certificate";
 
-export default function Home() {
+import Portfolio from "./components/portfolio/portfolio";
+import Experience, { ExperienceJSON } from '@/app/lib/database/models/experience';
+import { Op } from 'sequelize';
+import Project, { ProjectWithAllJSON } from '@/app/lib/database/models/project';
+import Certificate from '@/app/lib/database/models/certificate';
+import CertificateIssuer, { CertificateIssuerWithCertificatesJSON } from '@/app/lib/database/models/certificateissuer';
+
+export default async function Home() {
+
+  const experienceList = await Experience.findAll({
+      where: {
+        skill: {
+          [Op.gte]: 50
+        }
+      },
+      order: [['skill', 'DESC']]
+    });
+  const projectList = await Project.findAll({include: [{ all: true }]})
+  const certificateList = await CertificateIssuer.findAll({ include: Certificate });
+  
+  const experienceListJSON: ExperienceJSON[] = experienceList.map(x => x.toJSON())
+  const projectListJSON: ProjectWithAllJSON[] = projectList.map(x => x.toJSON())
+  const certificateListJSON: CertificateIssuerWithCertificatesJSON[] = certificateList.map(x => x.toJSON())
+
+  const data = {
+    experience: experienceListJSON ,
+    projects: projectListJSON,
+    certificates: certificateListJSON
+  }
 
   return (
-    <>
-      <header className={styles.header}>
-        <NavBar/>
-      </header>
-      <main className={styles.main}>
-        <Hero id={"Home"}></Hero>
-        <Experience id={"Experience"}></Experience>
-        <Projects id={"Projects"}></Projects>
-        <Certificates id={"Certificates"}></Certificates>
-      </main>
-    </>
+    <Portfolio data={data} ></Portfolio>
   );
 }
 

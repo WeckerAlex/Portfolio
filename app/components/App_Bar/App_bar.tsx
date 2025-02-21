@@ -35,7 +35,7 @@ export default function DrawerAppBar() {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton sx={{ textAlign: 'center' }}>                            
-                            <Link href={`#${item}`} scroll={true}>
+                            <Link href={{ pathname: '/', query: { page: item } }} scroll={true} >
                                 <ListItemText primary={item} />
                             </Link>
                         </ListItemButton>
@@ -68,7 +68,7 @@ export default function DrawerAppBar() {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (                          
-                            <Link key={item} href={`#${item}`} scroll={true}>
+                            <Link key={item} href={{ pathname: '/', query: { page: item } }} scroll={true} >
                                 <Button sx={{ color: '#fff' }}>{item}</Button>
                             </Link>
                         ))}

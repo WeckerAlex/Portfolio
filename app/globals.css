@@ -8,6 +8,7 @@
   --surface2: #111827;
   --primary: #F0F0F0;
   --primary_highlight: #EAB308;
+  --appbarHeight: 56px;
 }
 
 * {
@@ -31,5 +32,11 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (min-width: 600px) {
+  :root {
+    --appbarHeight: 64px;
   }
 }

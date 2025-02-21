@@ -1,6 +1,6 @@
 import { CreationOptional, DataTypes, HasManyAddAssociationMixin, HasManyAddAssociationsMixin, HasManyCountAssociationsMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManyHasAssociationMixin, HasManyHasAssociationsMixin, HasManyRemoveAssociationMixin, HasManyRemoveAssociationsMixin, HasManySetAssociationsMixin, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../db';
-import Certificate from './certificate';
+import Certificate, { CertificateJSON } from './certificate';
 
 class CertificateIssuer extends Model<InferAttributes<CertificateIssuer>, InferCreationAttributes<CertificateIssuer>> {
     declare id: CreationOptional<number>;
@@ -37,5 +37,14 @@ CertificateIssuer.init(
         timestamps: false
     },
 );
+
+export interface CertificateIssuerJSON {
+    id: number,
+    name: string
+}
+
+export interface CertificateIssuerWithCertificatesJSON extends CertificateIssuerJSON {
+    Certificates: CertificateJSON[]
+}
 
 export default CertificateIssuer

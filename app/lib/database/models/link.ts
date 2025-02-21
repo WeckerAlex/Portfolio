@@ -1,5 +1,6 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../db';
+import { ProjectJSON } from './project';
 
 class Link extends Model<InferAttributes<Link>, InferCreationAttributes<Link>> {
     declare id: CreationOptional<number>
@@ -30,5 +31,15 @@ Link.init(
         timestamps: false
     },
 );
+
+export interface LinkJSON {
+    id: number,
+    title: string
+    link: string
+}
+
+export interface LinkWithProjectsJSON extends LinkJSON {
+    Projects: ProjectJSON[]
+}
 
 export default Link

@@ -1,11 +1,11 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import styles from "./experienceCard.module.css";
 import React from 'react';
-import Experience from '@/app/lib/database/models/experience';
+import { ExperienceJSON } from '@/app/lib/database/models/experience';
 
 
 interface Props {
-    experience: Experience
+    experience: ExperienceJSON
 }
 
 const ExperienceCard = ({ experience }: Props) => {

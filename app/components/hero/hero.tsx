@@ -23,7 +23,7 @@ const hero = ({ id }: Props) => {
                     <Typography variant='h5' component={'h2'}>
                         Fullstack web developper
                     </Typography>
-                    <Button variant={'contained'} color='primary' href={`#Contact`} disableElevation>
+                    <Button variant={'contained'} color='primary' href={`/?page=Contact`} disableElevation>
                         Contact me
                     </Button>
                 </Box>
