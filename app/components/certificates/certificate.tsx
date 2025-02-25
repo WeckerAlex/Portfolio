@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Section from '../section/section';
 import styles from "./certificate.module.css";
 import CertificateCard from './components/certificateCard';
@@ -23,8 +23,8 @@ const Certificates = async ({ id, data }: Props) => {
             </Typography>
             {
                 data.sort((a, b) => (a.name.localeCompare(b.name))).map(certIssuer =>
-                    <>
-                        <Typography className={styles.certificateIssuer} variant="h6" color={'primary'} key={certIssuer.name} component="span">
+                    <Fragment key={certIssuer.name}>
+                        <Typography className={styles.certificateIssuer} variant="h6" color={'primary'} component="span">
                             {certIssuer.name}
                         </Typography>
 
@@ -36,7 +36,7 @@ const Certificates = async ({ id, data }: Props) => {
                             </Grid>
                             )}
                         </Grid>
-                    </>
+                    </Fragment>
                 )
             }
         </Section >
