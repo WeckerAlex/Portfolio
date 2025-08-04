@@ -1,11 +1,6 @@
 .card {
     position: relative;
-    margin: 8px;
-    max-width: 345px;
-    display: flex;
-    flex-direction: column;
     border-radius: 16px;
-    background-color: var(--surface2);
 }
 
 .cardMedia {

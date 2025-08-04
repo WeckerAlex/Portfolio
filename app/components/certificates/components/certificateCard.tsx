@@ -12,7 +12,17 @@ const CertificateCard = ({ certificate }: Props) => {
     const { name, image } = certificate
     const pdf = image.replace('.png', '.pdf');
     return (
-        <Card className={styles.card}>
+        <Card
+            sx={{
+                backgroundColor: 'var(--surface2)',
+                maxWidth: "345px",
+                display: "flex",
+                flexDirection: "column",
+                margin: "8px"
+
+            }}
+            className={styles.card}
+        >
             <CardMedia
                 className={styles.cardMedia}
                 component="img"

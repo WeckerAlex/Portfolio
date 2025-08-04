@@ -25,7 +25,7 @@ const projects = async ({ id, data }: Props) => {
                     (data) ?
                         (
                             data.map(project =>
-                                <Grid item xs={12} md={4} key={project.name} sx={{ height: '100%' }}>
+                                <Grid size={{xs:12, md:4}}  key={project.name} sx={{ height: '100%' }}>
                                     <ProjectCard
                                         project={project}
                                     />

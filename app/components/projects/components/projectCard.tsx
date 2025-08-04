@@ -9,11 +9,16 @@ interface Props {
 
 const projectCard = ({ project }: Props) => {
     return (
-        <Card className={styles.projectCard}>
+        <Card
+            sx={{
+                backgroundColor: 'var(--surface2)'
+            }}
+            className={styles.projectCard}
+        >
             <CardMedia
                 component="img"
                 height="194"
-                sx={{ 'objectPosition': 'top' }}
+                sx={{'objectPosition': 'top' }}
                 image={project.image}
                 alt={project.name}
             />
