@@ -9,12 +9,16 @@ import Experiences from "../experience/experience";
 import Hero from "../hero/hero";
 import Projects from "../projects/projects";
 
-import { ExperienceJSON } from "@/app/lib/database/models/experience";
+import { TechExperienceJSON } from "@/app/lib/database/models/techexperience";
+import { ProfExperienceJSON } from "@/app/lib/database/models/profexperience";
 import { ProjectWithAllJSON } from "@/app/lib/database/models/project";
 import { CertificateIssuerWithCertificatesJSON } from "@/app/lib/database/models/certificateissuer";
 
 type Data = {
-    experience: ExperienceJSON[];
+    experience: {
+        tech: TechExperienceJSON[],
+        prof: ProfExperienceJSON[]
+    };
     projects: ProjectWithAllJSON[];
     certificates: CertificateIssuerWithCertificatesJSON[];
 }
@@ -33,7 +37,7 @@ export default function Home({ data }: { data: Data }) {
             case 'Certificates':
                 setPage(searchParamsPage)
                 break;
-        } 
+        }
     }
 
     const pages = {
@@ -46,7 +50,7 @@ export default function Home({ data }: { data: Data }) {
     return (
         <>
             <header className={styles.header}>
-                <NavBar/>
+                <NavBar />
             </header>
             <main className={styles.main}>
                 {pages[page]}

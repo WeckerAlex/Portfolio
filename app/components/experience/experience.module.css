@@ -6,31 +6,7 @@
     padding: 24px;
 }
 
-.experienceList {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 8px;
-    padding-top: 8px;
-}
-
-@media screen and (max-width: 800px) {
-    .experienceList {
-        grid-template-columns: auto;
-    }
-}
-
-.experienceListItem {
-    list-style-type: none;
-}
-
-.sortPicker {
+.navtabs {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    justify-content: end;
-}
-
-.sortPicker>div {
-    width: 150px;
+    justify-content: center;
 }

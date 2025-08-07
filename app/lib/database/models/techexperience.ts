@@ -1,14 +1,14 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../db';
 
-class Experience extends Model<InferAttributes<Experience>, InferCreationAttributes<Experience>> {
+class TechExperience extends Model<InferAttributes<TechExperience>, InferCreationAttributes<TechExperience>> {
     declare id: CreationOptional<number>;
     declare name: string;
     declare image: string;
     declare skill: number;
 }
 
-Experience.init(
+TechExperience.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -32,16 +32,16 @@ Experience.init(
     {
         // Other model options go here
         sequelize, // We need to pass the connection instance
-        modelName: 'Experience', // We need to choose the model name
+        modelName: 'TechExperience', // We need to choose the model name
         timestamps: false
     },
 );
 
-export interface ExperienceJSON {
+export interface TechExperienceJSON {
     id: number,
     name: string,
     image: string,
     skill: number,
 }
 
-export default Experience
+export default TechExperience

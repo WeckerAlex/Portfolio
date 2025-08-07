@@ -3,7 +3,7 @@ import sequelize from '../db';
 import Job, { ProjectJSONWithProjectjob } from './job';
 import Link, { LinkJSON } from './link';
 import Projectjob from './projectjob';
-import Experience, { ExperienceJSON } from './experience';
+import TechExperience, { TechExperienceJSON } from './techexperience';
 
 class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>> {
     declare id: CreationOptional<number>
@@ -34,25 +34,25 @@ class Project extends Model<InferAttributes<Project>, InferCreationAttributes<Pr
     declare countLinks: HasManyCountAssociationsMixin;
     declare createLink: HasManyCreateAssociationMixin<Link>;
 
-    declare getExperiences: HasManyGetAssociationsMixin<Experience>; // Note the null assertions!
-    declare addExperience: HasManyAddAssociationMixin<Experience, number>;
-    declare addExperiences: HasManyAddAssociationsMixin<Experience, number>;
-    declare setExperiences: HasManySetAssociationsMixin<Experience, number>;
-    declare removeExperience: HasManyRemoveAssociationMixin<Experience, number>;
-    declare removeExperiences: HasManyRemoveAssociationsMixin<Experience, number>;
-    declare hasExperience: HasManyHasAssociationMixin<Experience, number>;
-    declare hasExperiences: HasManyHasAssociationsMixin<Experience, number>;
+    declare getExperiences: HasManyGetAssociationsMixin<TechExperience>; // Note the null assertions!
+    declare addExperience: HasManyAddAssociationMixin<TechExperience, number>;
+    declare addExperiences: HasManyAddAssociationsMixin<TechExperience, number>;
+    declare setExperiences: HasManySetAssociationsMixin<TechExperience, number>;
+    declare removeExperience: HasManyRemoveAssociationMixin<TechExperience, number>;
+    declare removeExperiences: HasManyRemoveAssociationsMixin<TechExperience, number>;
+    declare hasExperience: HasManyHasAssociationMixin<TechExperience, number>;
+    declare hasExperiences: HasManyHasAssociationsMixin<TechExperience, number>;
     declare countExperiences: HasManyCountAssociationsMixin;
-    declare createExperience: HasManyCreateAssociationMixin<Experience>;
+    declare createExperience: HasManyCreateAssociationMixin<TechExperience>;
 
     declare jobs?: NonAttribute<Job[]>
     declare links?: NonAttribute<Link[]>
-    declare experiences?: NonAttribute<Experience[]>
+    declare experiences?: NonAttribute<TechExperience[]>
 
     declare static associations: {
         jobs: Association<Project, Job>;
         links: Association<Project, Link>;
-        experiences: Association<Project, Experience>;
+        experiences: Association<Project, TechExperience>;
     };
 }
 
@@ -106,12 +106,12 @@ Link.belongsToMany(Project, {
     timestamps: false
 });
 
-Project.belongsToMany(Experience, {
+Project.belongsToMany(TechExperience, {
     through: 'Projectexperiences',
     as: 'experiences',
     timestamps: false
 });
-Experience.belongsToMany(Project, {
+TechExperience.belongsToMany(Project, {
     through: 'Projectexperiences',
     timestamps: false
 });
@@ -128,7 +128,7 @@ export interface ProjectJSON {
 export interface ProjectWithAllJSON extends ProjectJSON {
     jobs: ProjectJSONWithProjectjob[]
     links: LinkJSON[]
-    experiences: ExperienceJSON[]
+    experiences: TechExperienceJSON[]
 }
 
 export default Project

@@ -1,10 +1,11 @@
 import { describe, expect, test } from '@jest/globals';
-import Experience from './models/experience';
+import TechExperience from './models/techexperience';
 import Project from './models/project';
 import Job from './models/job';
 import Link from './models/link';
 import CertificateIssuer from './models/certificateissuer';
 import Certificate from './models/certificate';
+import ProfExperience from './models/profexperience';
 import sequelize from './db';
 
 describe('DB', () => {
@@ -12,17 +13,18 @@ describe('DB', () => {
         await sequelize.authenticate();
     });
 
-    let exp: Experience
+    let exp: TechExperience
     let job: Job
     let lnk: Link
     let pro: Project
     let cer: Certificate
     let ceI: CertificateIssuer
+    let pex: ProfExperience
 
     describe('Create', () => {
 
         test('Experience', async () => {
-            exp = await Experience.create({
+            exp = await TechExperience.create({
                 name: "Test",
                 image: "Test",
                 skill: 80
@@ -63,6 +65,14 @@ describe('DB', () => {
                 image: "Test"
             });
         });
+
+        test('ProfExperience', async () => {
+            pex = await ProfExperience.create({
+                title: "Test",
+                timerange: "Test"
+            });
+        });
+
     })
 
     describe('Update', () => {
@@ -73,7 +83,9 @@ describe('DB', () => {
         const pronewname = "pronewname"
         const cernewname = "cernewname"
         const ceInewname = "ceinewname"
-
+        const pexnewttle = "pexnewttle"
+        const pexnewanno = ["anno1","anno2"]
+        
         test('Experience', async () => {
             exp.name = expnewname;
             await exp.save();
@@ -99,6 +111,8 @@ describe('DB', () => {
         });
 
         test('Project', async () => {
+            console.log(Project.prototype);
+            
             pro.name = pronewname;
             await pro.save();
             pro.name = "";
@@ -108,7 +122,7 @@ describe('DB', () => {
 
         test('Project(jobs)', async () => {
             await pro.addJob(job)
-            const project = await Project.findByPk(pro.id,{
+            const project = await Project.findByPk(pro.id, {
                 include: 'jobs'
             });
             expect(project?.jobs).toHaveLength(1)
@@ -153,33 +167,49 @@ describe('DB', () => {
             });
             expect((await certificate?.getCertificateIssuer())?.id).toBe(ceI.id)
         });
+
+        test('ProfExperience(title)', async () => {
+            pex.title = pexnewttle;
+            await pex.save();
+            pex.title = "";
+            await pex.reload();
+            expect(pex.title).toBe(pexnewttle);
+        });
+
+        test('ProfExperience(annotations)', async () => {
+            pex.annotations = pexnewanno;
+            await pex.save();
+            pex.annotations = [];
+            await pex.reload();
+            expect(pex.annotations).toContain(pexnewanno[0]);
+        });
     })
 
     describe('Delete', () => {
 
         test('Experience', async () => {
-            const id = exp.id; 
+            const id = exp.id;
             await exp.destroy()
-            const res = await Experience.findByPk(id);
+            const res = await TechExperience.findByPk(id);
             expect(res).toBeNull();
         });
 
         test('Job', async () => {
-            const id = job.id; 
+            const id = job.id;
             await job.destroy()
             const res = await Job.findByPk(id);
             expect(res).toBeNull();
         });
 
         test('Link', async () => {
-            const id = lnk.id; 
+            const id = lnk.id;
             await lnk.destroy();
             const res = await Link.findByPk(id);
             expect(res).toBeNull();
         });
 
         test('Project', async () => {
-            const id = pro.id; 
+            const id = pro.id;
             await pro.destroy()
             const res = await Project.findByPk(id);
             expect(res).toBeNull();
@@ -196,6 +226,13 @@ describe('DB', () => {
             const id = cer.id;
             await cer.destroy()
             const res = await Certificate.findByPk(id);
+            expect(res).toBeNull();
+        });
+
+        test('ProfExperience', async () => {
+            const id = pex.id;
+            await pex.destroy()
+            const res = await ProfExperience.findByPk(id);
             expect(res).toBeNull();
         });
 

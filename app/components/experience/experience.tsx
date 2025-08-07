@@ -1,47 +1,25 @@
 import React, { useState } from 'react';
 import Section from '../section/section';
 import styles from "./experience.module.css";
-import ExperienceCard from './components/experienceCard';
-import { InputLabel, List, MenuItem, Select,  SelectChangeEvent , Typography } from '@mui/material';
-import { ExperienceJSON } from '@/app/lib/database/models/experience';
+import TechExperienceList from "./components/TechExperienceList/techExperienceList";
+import { Typography } from '@mui/material';
+import { TechExperienceJSON } from '@/app/lib/database/models/techexperience';
+import { ProfExperienceJSON } from '@/app/lib/database/models/profexperience';
+import NavigationTabs from '../navigationTabs/navigationTabs';
+import ProfExperience from './components/ProfExperience/profExperience';
 
 interface Props {
     id: string
-    data: ExperienceJSON[];
+    data: {
+            tech: TechExperienceJSON[],
+            prof: ProfExperienceJSON[]
+        };
 }
 
-const SortCriterium = {
-    SkillAscending: "Skill(asc)",
-    SkillDescending: "Skill(desc)",
-    NameAscending: "Name(asc)",
-    NameDescending: "Name(desc)"
-} as const
+const tabs = ["Technical", "Professional"]
 
-type SortCriteria = typeof SortCriterium[keyof typeof SortCriterium]
-
-
-const Experience = ({ id, data}: Props) => {
-    
-    const [sortCriterium, setSortCriterium] = useState<SortCriteria>(SortCriterium.SkillDescending);
-    
-    const handleChange = (event: SelectChangeEvent) => {
-        setSortCriterium(event.target.value as SortCriteria);
-    };
-    let sortedData;
-    switch (sortCriterium) {
-        case SortCriterium.NameAscending:
-            sortedData = data.toSorted((a: ExperienceJSON, b: ExperienceJSON) => (a.name.localeCompare(b.name)));
-            break;
-        case SortCriterium.NameDescending:
-            sortedData = data.toSorted((a: ExperienceJSON, b: ExperienceJSON) => (b.name.localeCompare(a.name)));
-            break;
-        case SortCriterium.SkillAscending:
-            sortedData = data.toSorted((a: ExperienceJSON, b: ExperienceJSON) => (a.skill - b.skill));
-            break;
-        case SortCriterium.SkillDescending:
-            sortedData = data.toSorted((a: ExperienceJSON, b: ExperienceJSON) => (b.skill - a.skill));
-            break;
-    }
+const Experience = ({ id, data }: Props) => {
+    const [tabIndex, setTabIndex] = useState(0);
 
     return (
         <Section id={id} className={styles.experienceSection}>
@@ -53,32 +31,12 @@ const Experience = ({ id, data}: Props) => {
                     Experience
                 </Typography>
             </Typography>
-            <div className={styles.sortPicker}>
-                <InputLabel id="sortby-select-label">Sort by:</InputLabel>
-                <Select
-                    labelId="sortby-select-label"
-                    id="sortby-select"
-                    value={sortCriterium}
-                    onChange={handleChange}
-                >
-                    {
-                        Object.values(SortCriterium).map(criterium => 
-                            <MenuItem key={criterium} value={criterium}>{criterium}</MenuItem>
-                        )
-                    }
-                </Select>
+            <div className={styles.navtabs}>
+                <NavigationTabs tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} ></NavigationTabs>
             </div>
-            <ul className={styles.experienceList}>
-                {
-                    sortedData.map(exp =>
-                        <li key={exp.name} className={styles.experienceListItem}>
-                            <ExperienceCard
-                                experience={exp}
-                            />
-                        </li>
-                    )
-                }
-            </ul>
+            {(tabIndex === 0) ? <TechExperienceList data={data.tech}></TechExperienceList> : null}
+            {(tabIndex === 1) ? <ProfExperience data={data.prof}></ProfExperience> : null}
+
         </Section >
     )
 }

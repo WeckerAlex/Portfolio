@@ -1,6 +1,7 @@
 
 import Portfolio from "./components/portfolio/portfolio";
-import Experience, { ExperienceJSON } from '@/app/lib/database/models/experience';
+import TechExperience, { TechExperienceJSON } from '@/app/lib/database/models/techexperience';
+import ProfExperience, { ProfExperienceJSON } from "@/app/lib/database/models/profexperience";
 import { Op } from 'sequelize';
 import Project, { ProjectWithAllJSON } from '@/app/lib/database/models/project';
 import Certificate from '@/app/lib/database/models/certificate';
@@ -8,23 +9,28 @@ import CertificateIssuer, { CertificateIssuerWithCertificatesJSON } from '@/app/
 
 export default async function Home() {
 
-  const experienceList = await Experience.findAll({
-      where: {
-        skill: {
-          [Op.gte]: 50
-        }
-      },
-      order: [['skill', 'DESC']]
-    });
-  const projectList = await Project.findAll({include: [{ all: true }]})
+  const techExperienceList = await TechExperience.findAll({
+    where: {
+      skill: {
+        [Op.gte]: 50
+      }
+    },
+    order: [['skill', 'DESC']]
+  });
+  const profExperienceList = await ProfExperience.findAll()
+  const projectList = await Project.findAll({ include: [{ all: true }] })
   const certificateList = await CertificateIssuer.findAll({ include: Certificate });
-  
-  const experienceListJSON: ExperienceJSON[] = experienceList.map(x => x.toJSON())
+
+  const techExperienceListJSON: TechExperienceJSON[] = techExperienceList.map(x => x.toJSON())
+  const profExperienceListJSON: ProfExperienceJSON[] = profExperienceList.map(x => x.toJSON())
   const projectListJSON: ProjectWithAllJSON[] = projectList.map(x => x.toJSON())
   const certificateListJSON: CertificateIssuerWithCertificatesJSON[] = certificateList.map(x => x.toJSON())
-
+  const experienceJSON = {
+    tech: techExperienceListJSON,
+    prof: profExperienceListJSON
+  }
   const data = {
-    experience: experienceListJSON ,
+    experience: experienceJSON,
     projects: projectListJSON,
     certificates: certificateListJSON
   }
