@@ -2,15 +2,19 @@ import React, { Fragment } from 'react';
 import Section from '../section/section';
 import styles from "./certificate.module.css";
 import CertificateCard from './components/certificateCard';
-import { Grid, Typography } from '@mui/material';
-import { CertificateIssuerWithCertificatesJSON } from '@/app/lib/database/models/certificateissuer';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import CertificateIssuer, { CertificateIssuerWithCertificatesJSON } from '@/app/lib/database/models/certificateissuer';
+import Certificate from '@/app/lib/database/models/certificate';
 
 interface Props {
     id: string
-    data: CertificateIssuerWithCertificatesJSON[];
 }
 
-const Certificates = async ({ id, data }: Props) => {
+const certificateList = await CertificateIssuer.findAll({ include: Certificate });
+const data: CertificateIssuerWithCertificatesJSON[] = certificateList.map(x => x.toJSON())
+
+const Certificates = async ({ id }: Props) => {
     return (
         <Section id={id} className={styles.certificateSection}>
             <Typography variant="h5" component="h3">
@@ -30,10 +34,10 @@ const Certificates = async ({ id, data }: Props) => {
 
                         <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }}>
                             {
-                            certIssuer.Certificates.map(cert => <Grid item xs={12} md={4} key={cert.name}>
-                                <CertificateCard
-                                    certificate={cert} />
-                            </Grid>
+                                certIssuer.Certificates.map(cert =>
+                                    <Grid size={{ xs: 12, sm: 6, md: 4 }} className={styles.certificateItem} key={cert.name}>
+                                        <CertificateCard certificate={cert} />
+                                    </Grid>
                             )}
                         </Grid>
                     </Fragment>

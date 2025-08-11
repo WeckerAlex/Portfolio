@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import styles from "./techExperienceList.module.css";
 import TechExperienceCard from './components/TechExperienceCard/techExperienceCard';

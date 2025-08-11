@@ -9,3 +9,8 @@
 .certificateIssuer {
     padding: 8px;
 }
+
+.certificateItem {
+    /* Mui Hack */
+    width: auto !important;
+}

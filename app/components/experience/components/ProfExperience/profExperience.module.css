@@ -1,3 +1,7 @@
+.timelineItem::before {
+    content: none !important;
+}
+
 .timelineItemAnnotationItem {
     padding: 2px 0px 2px 8px;
 }

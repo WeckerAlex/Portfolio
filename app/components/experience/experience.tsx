@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Section from '../section/section';
 import styles from "./experience.module.css";
 import TechExperienceList from "./components/TechExperienceList/techExperienceList";
 import { Typography } from '@mui/material';
-import { TechExperienceJSON } from '@/app/lib/database/models/techexperience';
-import { ProfExperienceJSON } from '@/app/lib/database/models/profexperience';
-import NavigationTabs from '../navigationTabs/navigationTabs';
+import TechExperienceModel, { TechExperienceJSON } from '@/app/lib/database/models/techexperience';
+import ProfExperienceModel, { ProfExperienceJSON } from '@/app/lib/database/models/profexperience';
 import ProfExperience from './components/ProfExperience/profExperience';
+import TabContainer from './components/TabContainer';
+import { Op } from 'sequelize';
 
 interface Props {
     id: string
-    data: {
-            tech: TechExperienceJSON[],
-            prof: ProfExperienceJSON[]
-        };
 }
 
-const tabs = ["Technical", "Professional"]
+const techExperienceList = await TechExperienceModel.findAll({
+    where: {
+        skill: {
+            [Op.gte]: 50
+        }
+    },
+    order: [['skill', 'DESC']]
+});
+const profExperienceList = await ProfExperienceModel.findAll()
 
-const Experience = ({ id, data }: Props) => {
-    const [tabIndex, setTabIndex] = useState(0);
+const techExperienceListJSON: TechExperienceJSON[] = techExperienceList.map(x => x.toJSON())
+const profExperienceListJSON: ProfExperienceJSON[] = profExperienceList.map(x => x.toJSON())
 
+const tabs = [{
+        title: "Technical",
+        tab: <TechExperienceList data={techExperienceListJSON}></TechExperienceList>
+    },
+    {
+        title: "Professional",
+        tab: <ProfExperience data={profExperienceListJSON}></ProfExperience>
+    }]
+
+const Experience = ({ id }: Props) => {
     return (
         <Section id={id} className={styles.experienceSection}>
             <Typography variant="h5" component="h3">
@@ -31,12 +46,7 @@ const Experience = ({ id, data }: Props) => {
                     Experience
                 </Typography>
             </Typography>
-            <div className={styles.navtabs}>
-                <NavigationTabs tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} ></NavigationTabs>
-            </div>
-            {(tabIndex === 0) ? <TechExperienceList data={data.tech}></TechExperienceList> : null}
-            {(tabIndex === 1) ? <ProfExperience data={data.prof}></ProfExperience> : null}
-
+            <TabContainer tabs={tabs}></TabContainer>
         </Section >
     )
 }

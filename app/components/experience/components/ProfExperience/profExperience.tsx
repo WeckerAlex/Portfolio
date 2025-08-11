@@ -17,7 +17,6 @@ const ProfExperience = ({ data }: Props) => {
     
     return (
         <Timeline
-            className={styles.timeline}
             sx={{
                 [`& .${timelineOppositeContentClasses.root}`]: {
                     flex: 0.2
@@ -25,34 +24,34 @@ const ProfExperience = ({ data }: Props) => {
                 paddingTop: "16px"
             }}
         >
-            {
+            {                
                 data.map(event => (
-                    <TimelineItem key={event.title}>
-                        <TimelineOppositeContent className={styles.timelineTimerange}>
+                    <TimelineItem key={event.title} className={styles.timelineItem}>
+                        <TimelineOppositeContent>
                             {event.timerange}
                         </TimelineOppositeContent>
                         <TimelineSeparator>
-                            <TimelineDot className={styles.timelineDot} />
+                            <TimelineDot />
                             {
                                 (event.title !== data.at(-1)?.title) ? <TimelineConnector /> : null
                             }
-                            
+
                         </TimelineSeparator>
                         <TimelineContent>
-                            <dl className={styles.timelineItemData}>
-                                
+                            <dl>
+
                                 <dt>{event.title}</dt>
                                 {
-                                    event.annotations ? 
+                                    event.annotations ?
                                         <>
                                             {
                                                 event.annotations.map(annotation => (
-                                                    <dd className={styles.timelineItemAnnotationItem} key={annotation}>{ annotation }</dd>
+                                                    <dd className={styles.timelineItemAnnotationItem} key={annotation}>{annotation}</dd>
                                                 ))
                                             }
                                         </>
-                                        
-                                    : null
+
+                                        : null
                                 }
                             </dl>
                         </TimelineContent>

@@ -3,13 +3,15 @@ import Section from '../section/section'
 import styles from "./projects.module.css";
 import ProjectCard from './components/projectCard';
 import { Grid, Typography } from '@mui/material'
-import { ProjectWithAllJSON } from '@/app/lib/database/models/project';
+import Project, { ProjectWithAllJSON } from '@/app/lib/database/models/project';
 interface Props {
     id: string
-    data: ProjectWithAllJSON[];
 }
 
-const projects = async ({ id, data }: Props) => {
+const projectList = await Project.findAll({ include: [{ all: true }] })
+const data: ProjectWithAllJSON[] = projectList.map(x => x.toJSON())
+
+const projects = async ({ id }: Props) => {
     return (
         <Section id={id} className={styles.projectsSection}>
             <Typography variant="h5" component="h3">

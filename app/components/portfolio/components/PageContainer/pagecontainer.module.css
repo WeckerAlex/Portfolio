@@ -1,0 +1,18 @@
+.header {
+    background-color: var(--surface1);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - var(--appbarHeight));
+}
+
+.main>* {
+    scroll-margin-top: var(--appbarHeight);
+    flex-grow: 1;
+}
+
+.main>* {
+    background-color: var(--surface1);
+}

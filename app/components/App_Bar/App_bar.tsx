@@ -19,11 +19,12 @@ import Link from 'next/link';
 
 const drawerWidth = 240;
 const appbarHeight = 56;
-const navItems = ['Home', 'Experience', 'Projects','Certificates', 'Contact'] as const;
 const name = "Alex Wecker"
+interface Props {
+    navItems: string[]
+}
 
-
-export default function DrawerAppBar() {
+export default function DrawerAppBar({ navItems }:Props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
